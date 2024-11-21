@@ -1,5 +1,4 @@
 <template>
-    <!-- Main container with responsive padding -->
     <div class="container mx-auto px-4 py-8">
         <h1 class="text-3xl font-bold text-center mb-8">Recherche de Plantes</h1>
 
@@ -19,37 +18,15 @@
             {{ error }}
         </div>
 
-        <!-- Grid layout for plant cards -->
-        <div v-if="!loading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- Plant card component with image and details -->
-            <div v-for="plant in filteredPlants" :key="plant.id" @click="navigateToPlant(plant.id)"
-                class="cursor-pointer bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
-                <!-- Plant image container with overlay -->
-                <div class="relative h-48">
-                    <img :src="plant.image_url || '/placeholder-plant.jpg'" :alt="plant.common_name"
-                        class="w-full h-full object-cover rounded-t-lg" @error="handleImageError" />
-                    <!-- Overlay with plant name -->
-                    <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2">
-                        <h2 class="text-lg font-semibold">{{ plant.common_name || 'Nom inconnu' }}</h2>
-                    </div>
-                </div>
-                <!-- Plant details section -->
-                <div class="p-4">
-                    <p class="text-gray-600 italic">{{ plant.scientific_name }}</p>
-                    <div class="mt-2 flex flex-wrap gap-2">
-                        <span class="text-sm bg-green-100 text-green-800 px-2 py-1 rounded">
-                            {{ plant.family }}
-                        </span>
-                        <span class="text-sm bg-blue-100 text-blue-800 px-2 py-1 rounded">
-                            {{ plant.genus }}
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!-- Plant Grid Component -->
+        <PlantGrid
+            :loading="loading"
+            :plants="filteredPlants"
+            @navigate="navigateToPlant"
+        />
 
         <!-- No results message -->
-        <div v-if="!loading && filteredPlants.length === 0" class="text-center text-gray-600 mt-8">
+        <div v-if="!loading && filteredPlants.length === 0" class="text-center text-slate-600 mt-8">
             Aucune plante trouvée pour "{{ searchQuery }}"
         </div>
 
@@ -66,6 +43,7 @@
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue'
 import Pagination from '~/components/index/Pagination.vue'
+import PlantGrid from '~/components/index/PlantGrid.vue'
 
 // State management with refs
 const searchQuery = ref('')
