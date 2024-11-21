@@ -1,14 +1,18 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
+// nuxt.config.ts
 export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
-
   postcss: {
     plugins: {
       tailwindcss: {},
       autoprefixer: {},
     },
   },
-
-  devtools: { enabled: true },
-  compatibilityDate: '2024-11-21'
+  runtimeConfig: {
+    public: {
+      trefleApiKey: process.env.TREFLE_API_KEY
+    }
+  },
+  devtools: {
+    enabled: false
+  }
 })
