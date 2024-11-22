@@ -7,7 +7,8 @@ This small project allows you to interact with the Trefle API to retrieve plant 
 ```bash
 git clone <REPOSITORY_URL>
 ```
-## Create a .env file: At the root of the project, create a .env file and add your Trefle API key:
+## Create a .env file: 
+At the root of the project, create a .env file and add your Trefle API key:
 
 ```bash
 TREFLE_API_KEY=your_api_key
