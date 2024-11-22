@@ -1,26 +1,33 @@
-// server/api/search.get.ts
 export default defineEventHandler(async (event) => {
     const config = useRuntimeConfig()
     const query = getQuery(event)
+    const page = parseInt(query.page as string) || 1
+
+    if (!query.query) {
+        return { data: [], meta: { total: 0 } }
+    }
 
     try {
-      // Make API call to Trefle search endpoint
-      const response = await fetch(`https://trefle.io/api/v1/plants/search?token=${config.public.trefleApiKey}&q=${query.q}`)
-      const data = await response.json()
+        const apiUrl = `https://trefle.io/api/v1/plants?token=${config.public.trefleApiKey}&filter[common_name]=${query.query}&page=${page}&per_page=20`
 
-      // Check if the API response is successful
-      if (!response.ok) {
-        throw new Error(`API response status: ${response.status}`)
-      }
+        const response = await fetch(apiUrl, {
+            headers: {
+                'Accept': 'application/json',
+            }
+        })
 
-      return data
+        if (!response.ok) {
+            throw new Error(`API response status: ${response.status}`)
+        }
+
+        const data = await response.json()
+        return data
 
     } catch (error) {
-      console.error('Trefle API Error:', error)
-      // Return appropriate error response
-      throw createError({
-        statusCode: 500,
-        message: 'Error while searching plants'
-      })
+        console.error('Trefle API Error:', error)
+        return {
+            data: [],
+            meta: { total: 0 }
+        }
     }
-  })
+})

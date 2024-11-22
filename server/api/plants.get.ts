@@ -1,30 +1,34 @@
-// server/api/plants.get.ts
 export default defineEventHandler(async (event) => {
-    const config = useRuntimeConfig()
-    const query = getQuery(event)
-    // Get page number from query params, default to 1 if not provided
-    const page = parseInt(query.page as string) || 1
+  const config = useRuntimeConfig()
+  const query = getQuery(event)
+  const page = parseInt(query.page as string) || 1
 
-    try {
-      // Make API call to Trefle plants endpoint with pagination and sorting
-      const response = await fetch(
-        `https://trefle.io/api/v1/plants?token=${config.public.trefleApiKey}&page=${page}&per_page=50&order[common_name]=asc`
-      )
+  try {
+      const url = new URL('https://trefle.io/api/v1/plants')
+      url.searchParams.append('token', config.public.trefleApiKey)
+      url.searchParams.append('page', page.toString())
+      url.searchParams.append('per_page', '20')
+      url.searchParams.append('order[common_name]', 'asc')
 
-      // Check if the API response is successful
+      const response = await fetch(url.toString(), {
+          headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+          }
+      })
+
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`)
+          throw new Error(`HTTP error! status: ${response.status}`)
       }
 
       const data = await response.json()
       return data
 
-    } catch (error) {
+  } catch (error) {
       console.error('Error fetching plants:', error)
-      // Return appropriate error response
       throw createError({
-        statusCode: 500,
-        message: 'Error while fetching plants'
+          statusCode: 500,
+          message: 'Error while fetching plants'
       })
-    }
-  })
+  }
+})
