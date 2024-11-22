@@ -8,7 +8,7 @@
             </button>
             <button @click="$emit('change', currentPage - 1)" :disabled="currentPage === 1"
                 class="pagination-button w-5 sm:w-24">
-                <span class="hidden sm:inline">Précédent</span>
+                <span class="hidden sm:inline">Previous</span>
                 <i class="sm:hidden fas fa-angle-left text-sm"></i>
             </button>
         </div>
@@ -18,14 +18,14 @@
             <span class="text-slate-400 select-none">Page</span>
             <input v-model="localPageInput" type="text" @input="validatePageInput" @change="handlePageInput"
                 class="w-14 px-2 py-1 border rounded-lg text-center focus:outline-none focus:ring-2 focus:ring-emerald-300" />
-            <span class="text-slate-400 select-none">sur {{ totalPages }}</span>
+            <span class="text-slate-400 select-none">of {{ totalPages }}</span>
         </div>
 
         <!-- Next buttons group -->
         <div class="flex gap-2">
             <button @click="$emit('change', currentPage + 1)" :disabled="currentPage === totalPages"
                 class="pagination-button w-5 sm:w-24">
-                <span class="hidden sm:inline">Suivant</span>
+                <span class="hidden sm:inline">Next</span>
                 <i class="sm:hidden fas fa-angle-right text-sm"></i>
             </button>
             <button @click="$emit('change', totalPages)" :disabled="currentPage === totalPages"
