@@ -1,3 +1,18 @@
+
+![localhost_3000](https://github.com/user-attachments/assets/49879424-47d1-4968-9592-21617181dd03)
+# Overview 
+This small project allows you to interact with the Trefle API to retrieve plant data using your personal API key. The website is set up to make requests to the Trefle API and display information about plants.
+
+## Steps to get started:
+```bash
+git clone <REPOSITORY_URL>
+```
+## Create a .env file: At the root of the project, create a .env file and add your Trefle API key:
+
+```bash
+TREFLE_API_KEY=your_api_key
+```
+
 # Nuxt Minimal Starter
 
 Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
@@ -19,6 +34,7 @@ yarn install
 # bun
 bun install
 ```
+
 
 ## Development Server
 
