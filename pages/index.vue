@@ -5,7 +5,7 @@
         <!-- Search bar component -->
         <div class="max-w-xl mx-auto mb-8">
             <input v-model="searchQuery" type="text" placeholder="Rechercher une plante..."
-                class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" />
+                class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-300" />
         </div>
 
         <!-- Loading state indicator -->

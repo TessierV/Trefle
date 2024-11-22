@@ -17,7 +17,7 @@
         <div class="flex items-center gap-1">
             <span class="text-slate-400 select-none">Page</span>
             <input v-model="localPageInput" type="text" @input="validatePageInput" @change="handlePageInput"
-                class="w-14 px-2 py-1 border rounded-lg text-center focus:outline-none focus:ring-2 focus:ring-green-500" />
+                class="w-14 px-2 py-1 border rounded-lg text-center focus:outline-none focus:ring-2 focus:ring-emerald-300" />
             <span class="text-slate-400 select-none">sur {{ totalPages }}</span>
         </div>
 
@@ -89,6 +89,6 @@ watch(() => props.currentPage, (newValue) => {
 
 <style scoped>
 .pagination-button {
-    @apply disabled:opacity-0 text-slate-400 hover:text-slate-800 flex items-center justify-center transition-all duration-300 ease-in-out;
+    @apply disabled:opacity-0 text-slate-400 hover:text-emerald-400 flex items-center justify-center transition-all duration-300 ease-in-out;
 }
 </style>
