@@ -33,11 +33,13 @@
 </template>
 
 <script setup>
+
 import { ref, watch } from 'vue'
 import TitleSection from '~/components/index/TitleSection.vue'
 import SearchBar from '~/components/index/SearchBar.vue'
 import Pagination from '~/components/index/Pagination.vue'
 import PlantGrid from '~/components/index/PlantGrid.vue'
+
 
 const searchQuery = ref('')
 const plants = ref([])
